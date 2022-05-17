@@ -1,107 +1,238 @@
-<style type="text/css">
 <!--
-.STYLE4 {
-	font-family: "»ªÎÄ";
-	font-weight: bold;
-	font-size: xx-large;
-	color: #FF9999;
-}
-.STYLE7 {
-	font-family: "Î¢ÈíÑÅºÚ Light";
-	font-size: xx-large;
-	font-weight: bold;
-}
+	THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=line-simple
 -->
-</style>
-<script type="text/JavaScript">
-<!--
-function MM_swapImgRestore() { //v3.0
-  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
-}
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 75%"></div>
 
-function MM_preloadImages() { //v3.0
-  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
-    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
-    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
-}
+  
+  <script type="text/javascript" src="echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
 
-function MM_findObj(n, d) { //v4.01
-  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-  if(!x && d.getElementById) x=d.getElementById(n); return x;
-}
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
 
-function MM_swapImage() { //v3.0
-  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
-   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
-}
+    option = {
+    title: {
+    text: "å·¥å†µ1ã€2åŽ‹å¼ºå¯¹æ¯”å›¾",
+    left: "center",
+    textStyle: {
+      fontSize: 30,
+      fontWeight: "bold"
+    },
+  },
+   tooltip: {
+    triggerOn: "mousemove",
+    alwaysShowContent: false,
+//     position: function(pt) {
+//       return [pt[0], 130];
+//     },
+    trigger: "axis",
+    show: true,
+  },
+  legend: {
+	left: "75%",
+    textStyle: {
+      fontWeight: "bold",
+      fontSize: 13
+    }
+  },
+  xAxis: {
+	name:'æ—¶é—´ï¼ˆsï¼‰',
+	nameTextStyle: {
+	  fontStyle: "normal",
+	  fontWeight: "bold",
+	  fontSize: 13
+	},
+    type: 'value',
+    //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+	min:250,
+	max:1000,
+	interval:50,
+	splitLine:{show: false},
+	axisPointer: {
+      show: true,
+      type: "none",
+	  snap:false
+    }
+  },
+  yAxis: {
+	name:'åŽ‹å¼ºï¼ˆPaï¼‰',
+	nameTextStyle: {
+      fontStyle: "normal",
+      fontWeight: "bold",
+	  fontSize: 13
+    },
+    type: 'value',
+	min:55000,
+	max:85000,
+	interval:5000,
+	splitLine:{show: false}
+  },
+  series:[{
+        name:'å·¥å†µ1',
+        symbolSize: 5,
+        data: [
+            [251.54322,61339.38717],
+[260.66976,61339.38717],
+[271.23193,61214.1701],
+[281.7941,61339.38717],
+[292.35627,61339.38717],
+[302.91844,62441.29738],
+[313.4806,60354.34622],
+[324.14532,61706.69057],
+[333.16931,62691.73152],
+[345.26966,64044.07587],
+[355.83183,64536.59635],
+[364.85582,64653.46561],
+[375.41799,65145.98609],
+[384.54452,65888.9407],
+[396.64487,66131.02703],
+[407.20704,66865.63384],
+[417.76921,67483.37139],
+[426.7932,67850.67479],
+[437.35537,68585.2816],
+[448.02008,68960.93281],
+[458.58225,69570.32255],
+[469.14442,70188.06009],
+[479.70659,70555.3635],
+[490.26876,71173.10104],
+[500.83093,71540.40445],
+[511.3931,72149.79419],
+[520.51963,72642.31466],
+[531.0818,73009.61806],
+[541.64397,73627.35561],
+[552.20614,73994.65901],
+[562.76831,74361.96242],
+[573.33048,74979.69996],
+[582.45702,75347.00337],
+[593.01918,75839.52384],
+[603.58135,76206.82724],
+[614.14352,76824.56479],
+[623.27006,77191.86819],
+[635.26786,77559.1716],
+[645.93258,77926.475],
+[654.95657,78418.99548],
+[667.05692,78661.08181],
+[676.0809,79036.73302],
+[686.64307,79404.03642],
+[697.20524,79646.12276],
+[707.86996,79896.5569],
+[718.43213,80138.64323],
+[728.9943,80263.8603],
+[738.01829,80631.16371],
+[748.58046,80756.38078],
+[759.14262,80998.46711],
+[769.80734,81248.90125],
+[780.36951,81365.77052],
+[790.93168,81365.77052],
+[801.49385,81490.98759],
+[810.51784,81616.20466],
+[822.61819,81733.07392],
+[831.74472,81733.07392],
+[843.84507,81858.29099],
+[852.86906,81858.29099],
+[863.43123,81858.29099],
+[873.9934,82108.72513],
+[884.55557,82108.72513],
+[893.6821,82108.72513],
+[904.24427,82225.5944],
+[913.26826,82108.72513],
+[925.36861,82225.5944]
 
-//-->
+        ],
+        type: 'line',
+        smooth:true,
+        showSymbol: false,
+       // barGap: 0
+    },
+    {
+        name:'å·¥å†µ2',
+        symbolSize: 5,
+        data: [
+            [251.43138,61281.14847],
+[261.73579,61382.68041],
+[282.50073,61281.14847],
+[303.26568,61484.21235],
+[324.03062,61382.68041],
+[344.79557,61382.68041],
+[365.56051,61484.21235],
+[384.60805,61585.74429],
+[407.0904,61585.74429],
+[427.85534,61585.74429],
+[446.90289,62102.63416],
+[467.66783,62508.76191],
+[488.43278,62711.82579],
+[509.19772,63533.31148],
+[529.96266,64040.97118],
+[550.72761,64862.45687],
+[571.49255,65776.24432],
+[590.5401,66902.32582],
+[613.02244,68028.40733],
+[633.78739,68951.42496],
+[654.55233,70077.50647],
+[675.31727,71092.82586],
+[696.08222,72117.37542],
+[716.84716,73141.92499],
+[735.89471,73963.41068],
+[758.37705,74978.73007],
+[777.42459,75901.7477],
+[798.18954,76824.76533],
+[818.95448,77535.4889],
+[839.71943,78356.97459],
+[860.48437,79076.92834],
+[881.24932,79686.11998],
+[902.01426,80193.77967],
+[922.7792,80710.66954],
+[943.54415,81116.7973],
+[964.30909,81421.39312],
+[983.20051,81633.68717],
+[1005.83898,81836.75105],
+[1026.60393,81938.28299]
 
-</script>
-<body onLoad="MM_preloadImages('images/21a4462309f79052ac6d8d5d06f3d7ca7bcbd567.jfif')"><table width="1197" border="1">
-<tr>
-    <td height="75" colspan="2" bordercolor="0"><h1 align="center" class="STYLE4">¾­µäµçÓ°½éÉÜ</h1></td>
-  </tr>
-  <tr>
-    <td width="599"><marquee behavior="scroll" direction="left" loop="infinite" scrollamount="3">
-    <p><img src="images/1ad5ad6eddc451dad6424210b0fd5266d1163290.jfif" width="500" height="300"><img src="images/u=15839318,3838929883&fm=26&fmt=auto&gp=0.webp" height="300"><img src="images/u=1443311353,1016165554&fm=26&fmt=auto&gp=0.webp" alt="" width="500" height="300">    </p>
-    <p>&nbsp;</p>
-    </marquee></td>
-    <td width="582" class="STYLE7"><span class="STYLE4">°¢¸ÊÕý´«</span>    
-    <div class="STYLE4" id="jvqing"><a href="°¢¸ÊÕý´«¾çÇé.html">¾çÇé¼ò½é</a></div>
-    <div class="STYLE4" id="jiaose"><a href="°¢¸ÊÕý´«½ÇÉ«.html">½ÇÉ«½éÉÜ</a></div>
-    <div class="STYLE4" id="yingping">
-      <p><a href="°¢¸ÊÕý´«Ó°ÆÀ.html">Ó°Æ¬ÆÀ¼Û</a></p>
-      <p><a href="¡¾ÀøÖ¾¡¿È¼£¡1080p°¢¸ÊÕý´«»ì¼ô - 1.1570246689577(Av69810895,P1).mp4"><img src="images/u=878481609,2488468794&fm=26&fmt=auto&gp=0.webp" width="50" height="30" border="0"></a></p>
-    </div></td>
-  </tr>
-  <tr>
-    <td><marquee behavior="scroll" direction="left" loop="infinite" scrollamount="3"><img src="images/21a4462309f79052ac6d8d5d06f3d7ca7bcbd567.jfif" alt="" width="500" height="300"><img src="images/u=1958262532,3579979655&fm=26&fmt=auto&gp=0.webp" height="300"><img src="images/u=2487116247,848914908&fm=26&fmt=auto&gp=0.webp" height="300"><marquee>
-    <td><p class="STYLE4">¹¦·ò
-      
-    </p>
-      <div class="STYLE4" id="div"><a href="¹¦·ò¾çÇé.html">¾çÇé¼ò½é</a></div>
-      <div class="STYLE4" id="div2"><a href="¹¦·ò½ÇÉ«.html">½ÇÉ«½éÉÜ</a></div>
-    <div class="STYLE4" id="div3"><a href="¹¦·òÓ°ÆÀ.html">Ó°Æ¬ÆÀ¼Û</a>
-      <div><a href="¹¦·ò¼ô¼­ - 1.[www.domp4.com]³ý±©.Caught.in.Time.2020.(Av501748638,P1).mp4"><img src="images/u=878481609,2488468794&fm=26&fmt=auto&gp=0.webp" width="50" height="30" border="0"></a></div>
-      <div></div>
-    </div>      
-    <p>&nbsp;</p></td>
-  <tr>
-    <td><marquee behavior="scroll" direction="left" loop="infinite" scrollamount="3"><img src="images/314e251f95cad1c8a7861ad1b2737009c93d71cffbbd.jfif" alt="" width="500" height="300"><img src="images/u=374514066,1040925098&fm=26&fmt=auto&gp=0.webp" height="300"><img src="images/u=1823119448,319560635&fm=26&fmt=auto&gp=0.webp" height="300"><marquee>
-    <td><p class="STYLE4">¶ßÀ²AÃÎ2£º°éÎÒÍ¬ÐÐ</p>
-      <div class="STYLE4" id="div4"><a href="¶ßÀ²AÃÎ¾çÇé.html">¾çÇé¼ò½é</a></div>
-      <div class="STYLE4" id="div5"><a href="¶ßÀ²AÃÎ½ÇÉ«.html">½ÇÉ«½éÉÜ</a></div>
-    <div class="STYLE4" id="div6"><a href="¶ßÀ²AÃÎÓ°ÆÀ.html">Ó°Æ¬ÆÀ¼Û</a>
-      <div><a href="¡¾¶ßÀ²AÃÎ¡¿°éÎÒÍ¬ÐÐ2ÃÎ»Ã¼ô¼­ - 1.dlam(Av375920059,P1).mp4"><img src="images/u=878481609,2488468794&fm=26&fmt=auto&gp=0.webp" width="50" height="30" border="0"></a></div>
-    </div>      
-    <p>&nbsp;</p></td>
-  <tr>
-    <td><marquee behavior="scroll" direction="left" loop="infinite" scrollamount="3"><img src="images/b7003af33a87e950e5ca4e9716385343faf2b468.jfif" alt="" width="500" height="300"><img src="images/u=3813779711,2933505573&fm=26&fmt=auto&gp=0.webp" height="300"><img src="images/u=2796793656,4265775835&fm=26&fmt=auto&gp=0.webp" height="300"><marquee>
-    <td bordercolor="0"><p class="STYLE4">°ÔÍõ±ð¼§</p>
-      <div class="STYLE4" id="div7"><a href="°ÔÍõ±ð¼§¾çÇé.html">¾çÇé¼ò½é</a></div>
-      <div class="STYLE4" id="div8"><a href="°ÔÍõ±ð¼§½ÇÉ«.html">½ÇÉ«½éÉÜ</a></div>
-    <div class="STYLE4" id="div9">
-      <p><a href="°ÔÍõ±ð¼§Ó°ÆÀ.html">Ó°Æ¬ÆÀ¼Û</a></p>
-      <p><a href="¡¾ÐÂÊÖ×÷ÒµÏò¼ô¼­¡¿°ÔÍõ±ð¼§»ì¼ô£¬¸ç¸çÕæºÃ¿´ - 1.°ÔÍõ±ð¼§»ì¼ô×îÖÕ°æ(Av70851117,P1).mp4"><img src="images/u=878481609,2488468794&fm=26&fmt=auto&gp=0.webp" width="50" height="30" border="0"></a></p>
-      <div class="STYLE4" id="div13">
-        <div></div>
-      </div>
-    </div>      
-    <p>&nbsp;</p></td>
-  <tr>
-    <td><marquee behavior="scroll" direction="left" loop="infinite" scrollamount="3"><img src="images/e7cd7b899e510fb30f24e313f578df95d143ad4ba656.jfif" alt="" width="500" height="300"><img src="images/u=4211909018,1294946281&fm=26&fmt=auto&gp=0.webp" height="300"><img src="images/u=4211909018,1294946281&fm=26&fmt=auto&gp=0.webp" height="300"><marquee>
-    <td><p class="STYLE4">Ð¤Éê¿ËµÄ
-      
-      ¾ÈÊê</p>
-      <div class="STYLE4" id="div10"><a href="Ð¤Éê¿ËµÄ¾ÈÊê¾çÇé.html">¾çÇé¼ò½é</a></div>
-      <div class="STYLE4" id="div11"><a href="Ð¤Éê¿ËµÄ¾ÈÊê½ÇÉ«.html">½ÇÉ«½éÉÜ</a></div>
-    <div class="STYLE4" id="div12">
-      <p><a href="Ð¤Éê¿ËµÄ¾ÈÊêÓ°ÆÀ.html">Ó°Æ¬ÆÀ¼Û</a></p>
-      <p><a href="¡¾Ð¤Éê¿ËµÄ¾ÈÊê¡¿Hope £¨¸ßÈ¼»ì¼ôµçÓ°¼ô¼­£© - 1.John Dreamer - Rise - Epic Music(Av710290942,P1).mp4"><img src="images/u=878481609,2488468794&fm=26&fmt=auto&gp=0.webp" width="50" height="30" border="0"></a></p>
-    </div>      
-    <p>&nbsp;</p></td>
-</tr>
+        ],
+        type: 'line',
+        smooth:true,
+        showSymbol:false,
+        barGap: 0
+    }
+    ],
+
+  
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
